@@ -1,0 +1,28 @@
+{
+  "name": "financial-transparency-db",
+  "version": "1.0.0",
+  "description": "REST API for connecting to the financial transparency MSSQL Server",
+  "main": "index.js",
+  "bin": "index.js",
+  "pkg": {
+    "assets": [
+      "dist/**/*"
+    ]
+  },
+  "scripts": {
+    "start": "nodemon index.js dev"
+  },
+  "author": "DCSD IT",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mssql": "^4.0.4",
+    "webpack": "^2.7.0",
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-hot-middleware": "^2.18.2"
+  }
+}
