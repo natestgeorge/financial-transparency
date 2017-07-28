@@ -66,7 +66,7 @@ export class ResultsComponent {
       this.isLoading = false;
       this.lastSort = "";
       this.currentSort = "";
-      this.invert = false;
+      this.invert = true;
       this.niceColumnNames = {
          "vendorName": "Vendor",
          "transactionDate": "Date",
@@ -138,6 +138,7 @@ export class ResultsComponent {
                   this.columns.forEach((column:any, i:number) => {
                      this.niceColumns[i] = this.niceColumnNames[column];
                   });
+                  this.sortObjectArray(this.data, "Date");
                } catch (e) {
                   this.isLoading = false;
                   if(e instanceof TypeError) {

@@ -41,7 +41,7 @@
    width: 100vw;
    margin-left: -16px;
    margin-top: calc(83px - 1rem);
-   overflow: scroll;
+   overflow: auto;
 }
 
 .pagination {
