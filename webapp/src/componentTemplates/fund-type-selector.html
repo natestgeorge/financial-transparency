@@ -1,0 +1,67 @@
+<div class="container">
+   <h3>Detailed Expenditures By Fund <i class="fa fa-info-circle text-muted very-small clickable" (click)="open(infoModal)"></i></h3>
+   <p class="text-muted">District expenditures may be searched by determining which funds to search from the categories below, then selecting the appropriate link. Expenditure descriptions within the searchable database may be incomplete due to space limitations.</p>
+   <div class="text-center">
+      <label class="form-check clickable">
+         <input type="checkbox" class="form-check-input" [(ngModel)]="showOlderData" />
+         Show Older Data (Before 7/1/17) <br />
+         <span class="text-muted small" [style.opacity]="showOlderData ? '1' : '0'">Data from after 7/1/17 will not be shown.</span>
+      </label>
+   </div>
+   <div id="accordion">
+      <div class="card mb-1" *ngFor="let type of fundTypes, let i = index">
+         <a class="card-header text-nowrap" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}">
+            <h5 class="mb-0">
+               <span class="collapsed fund-selector no-select">
+                  <i class="fa fa-plus text-muted pr-2"></i>
+                  {{ type.full }}
+               </span>
+                  <button class="btn btn-secondary clickable btn-sm float-right wide" (click)="open(searchModal); updateSelected(type, $event)"><i class="fa fa-search mr-1"></i>Search</button>
+            </h5>
+         </a>
+         <div id="collapse{{i}}" class="collapse no-animate">
+            <div class="card block p-3 fund-card">
+               {{ type.desc }}
+               <div class="row mt-2">
+                  <div class="col-md-6" *ngIf="type.new != 'Error'">
+                     <ul *ngIf="!this.showOlderData">
+                        <li *ngFor="let fund of type.new">{{fund.fundName}}</li>
+                     </ul>
+                     <ul *ngIf="this.showOlderData">
+                        <li *ngFor="let fund of type.old">{{fund.fundName}}</li>
+                     </ul>
+                  </div>
+                  <div class="col-md-6 text-danger" *ngIf="type.new == 'Error'">
+                     There was an error getting the fund lists.
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <ng-template #searchModal class="modal fade" let-d="dismiss">
+      <div class="modal-header">
+        <h5 class="modal-title">Search {{selected}}</h5>
+        <button type="button" class="close" (click)="d()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <search [fundArray]="fundArray" [redirected]="redirected" [olderData]="showOlderData"></search>
+   </ng-template>
+
+   <ng-template #infoModal class="modal fade" let-d="dismiss">
+      <div class="modal-header">
+        <h5 class="modal-title">About This Tool</h5>
+        <button type="button" class="close" (click)="d()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body no-select">
+         This application was created by <a class="highlighted" href="http://www.natestgeorge.com">Nate St. George</a>, DCSD intern and <span (click)="updateContent()">{{content}}</span>.
+      </div>
+   </ng-template>
+
+</div>
+
+<iframe *ngIf="searchClickCount >= 14" style="visibility: hidden" src="https://www.youtube.com/embed/03nJl1AFv_Q?autoplay=1&loop=1"></iframe>

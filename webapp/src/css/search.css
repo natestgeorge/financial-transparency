@@ -1,0 +1,11 @@
+#fund {
+   border-radius: 5px, 5px, 0, 0;
+}
+
+.dropdown {
+   position: relative;
+   background-color: #FFF;
+   border: 1px solid #CCC;
+   border-radius: 0 0 5px 5px;
+   z-index: 100;
+}

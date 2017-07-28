@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+
+body {
+   font-family: 'Open Sans', sans-serif;
+}
+
+/* Bootstrap Overrides */
+.btn {
+   cursor: pointer;
+}
+
+/* Generic Classes */
+
+.wide {
+   min-width: 200px;
+}
+
+.center-container {
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.result-container {
+   width: 100%;
+}
+
+.clickable {
+	cursor: pointer;
+		     user-select: none;
+		 -ms-user-select: none;
+		-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+.no-select {
+			  user-select: none;
+		 -ms-user-select: none;
+		-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+.clickable:not(.btn):hover {
+	opacity: 0.8;
+}
+
+:not(.no-animate) {
+   transition: 0.2s;
+}
+
+.fa { /* More icons need this than don't */
+    vertical-align: middle;
+    margin-top: -0.125em;
+}
+
+.fa.fa-no-adjust {
+    margin-top: 0;
+}
+
+.dropdown-menu * {
+   transition: 0s;
+}
+
+.popover {
+   transition: 0s;
+}
+
+.popover-content {
+   max-height: 200px;
+   overflow-y: scroll;
+}
+
+.very-small {
+   font-size: 60%;
+}
+
+a {
+   color: #555;
+}
+
+a:hover {
+   text-decoration: none;
+   color: #555;
+   opacity: 0.8;
+}
+
+a.card-header:hover {
+   padding-left: 25px;
+}
+
+a:focus {
+   color: #555;
+   text-decoration: none;
+}
+
+.highlighted {
+   color: #4189FC;
+}
+
+a.highlighted:hover {
+   text-decoration: none;
+   color: #4189FC;
+   opacity: 0.8;
+}
+
+strong {
+   font-weight: 600;
+}
+
+@media(max-width:768px) {
+   body {
+      font-size: 20px;
+   }
+   .wide {
+      min-width: inherit;
+   }
+}
+/*EVERYTHING BEYOND THIS POINT IS TOP SECRET*/
+
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+.rainbow button:hover, .rainbow a:hover {
+   animation: bounce .5s linear infinite;
+}
+
+.rainbow {
+   animation: rainbow 10s ease-in-out infinite;
+   /*font-family: 'Press Start 2P';*/
+}
+
+.rainbow :not(.fa) {
+   font-family: 'Press Start 2P' !important;
+   border-radius: 0;
+}
+
+.util {
+   background-image: url('../img/util.gif');
+   background-size: cover;
+   width: 60px;
+   height: 30px;
+   visibility: hidden;
+}
+
+@keyframes bounce {
+   0% {
+      transform: translateY(0);
+   }
+   50% {
+      transform: translateY(-5px);
+   }
+   100% {
+      transform: translateY(0);
+   }
+}
+
+@keyframes rainbow {
+   0% {
+      background-color: red;
+   }
+   16% {
+      background-color: orange;
+   }
+   33% {
+      background-color: yellow;
+   }
+   49% {
+      background-color: lime;
+   }
+   66% {
+      background-color: blue;
+   }
+   82% {
+      background-color: fuchsia;
+   }
+   100% {
+      background-color: red;
+   }
+}

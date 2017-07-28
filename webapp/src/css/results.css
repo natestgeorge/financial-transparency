@@ -1,0 +1,67 @@
+#filterString {
+   text-transform: capitalize;
+}
+
+#resultsHeader {
+   background-color: #FFF;
+   position: fixed;
+   top: 0px;
+   width: 100vw;
+   border-bottom: 1px solid #DDD;
+   margin-left: -15px;
+   padding-left: 15px;
+   padding-bottom: 1rem;
+   padding-top: 1rem;
+   z-index: 1000;
+
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: flex-start;
+}
+
+#resultsFooter {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   align-content: center;
+   background-color: #F6F6F6;
+   width: 100vw;
+   min-height: 116px;
+   position: fixed;
+   bottom: 0px;
+   margin-left: -15px;
+   padding: 1rem 3rem;
+   border-top: 1px solid #DDD;
+}
+
+#tableContainer {
+   height: calc(100vh - 199px);
+   width: 100vw;
+   margin-left: -16px;
+   margin-top: calc(83px - 1rem);
+   overflow: scroll;
+}
+
+.pagination {
+   margin-bottom: -16px;
+}
+
+.table-dense {
+   font-size: 0.7rem;
+   display: block;
+   margin-bottom: 0 !important;
+}
+
+.table-headers {
+   min-width: 90px;
+}
+
+.subtitle-children {
+   border-right: 1px solid #CCC;
+}
+
+.subtitle-children *:not(:last-child) {
+   margin-bottom: -10px;
+}

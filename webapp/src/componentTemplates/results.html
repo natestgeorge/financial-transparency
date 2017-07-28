@@ -1,0 +1,62 @@
+<span id="resultsHeader" class="page-header lead">
+   <i class="fa fa-caret-left fa-lg clickable no-select px-3 py-2" [routerLink]="['/']" ></i>
+   <span class="subtitle-children pr-3">
+      <div>
+         {{ fundType }}
+      </div>
+      <a class="very-small highlighted clickable" href="#/results" [routerLink]="['/']">Back to Main</a>
+   </span>
+   <small class="text-muted pl-3"> {{ (search.start | date: 'MM/dd/yyyy') + " - " + (search.end | date: 'MM/dd/yyyy') }} </small>
+   <div class="util float-right mx-3"></div>
+   <small id="filterString" class="text-muted float-right pr-3" [innerHtml]="filterString"></small>
+</span>
+
+<div id="tableContainer">
+   <div class="horizontal-center text-center mt-3" *ngIf="isLoading && !hasErr">
+      <i class="fa fa-cog fa-lg fa-spin"></i> <br />
+   </div>
+
+   <div class="horizontal-center text-center mt-3" *ngIf="(noResults && !isLoading) || hasErr">
+      <span class="text-muted" *ngIf="noResults && !isLoading">No results for that query.</span>
+      <span class="text-danger" *ngIf="hasErr">An error occurred.</span>
+   </div>
+
+   <table id="resultsTable" class="table table-dense my-6" *ngIf="!noResults">
+      <thead>
+         <th class="table-headers clickable" *ngFor="let column of niceColumns" (click)="sortObjectArray(data, column)">
+            {{ column }} <i *ngIf="this.currentSort == column" [ngClass]="{'fa-flip-vertical': !invert}" class="fa fa-caret-down"></i>
+         </th>
+         <tr *ngFor="let entry of dataSplit">
+            <td *ngFor="let column of columns">
+               {{ getEntryColumnValue(entry, column) || "-" }}
+            </td>
+         </tr>
+      </thead>
+   </table>
+</div>
+
+<span id="resultsFooter" *ngIf="resultsRows > 0">
+   <div class="form-group">
+      <div class="text-muted small" *ngIf="resultsRows == 500">
+         <span>{{resultsRows}}+ results - </span>
+         <u class="clickable" (click)="getAllData()">Get all results</u>
+      </div>
+
+      <span class="text-muted small" *ngIf="resultsRows > 1 && resultsRows != 500">{{resultsRows}} results</span>
+      <span class="text-muted small" *ngIf="resultsRows == 1">{{resultsRows}} result</span>
+      <br />
+      <a class="highlighted small clickable" (click)="convertCSV()" href="#/results">Export CSV</a>
+   </div>
+
+   <ngb-pagination class="pagination" [collectionSize]="data.length" [maxSize]="5" [rotate]="true" [pageSize]="entriesPerPage" (pageChange)="onSplitChange()" [(page)]="page"></ngb-pagination>
+   <div class="form-group entries">
+      <label for="entriesPerPage" class="text-muted small">Entries Per Page:</label>
+      <select id="entriesPerPage" class="form-control form-control-sm" (change)="onSplitChange()" [(ngModel)]="entriesPerPage">
+         <option>10</option>
+         <option>20</option>
+         <option>50</option>
+         <option>100</option>
+         <option value="99999999">All</option>
+      </select>
+   </div>
+</span>

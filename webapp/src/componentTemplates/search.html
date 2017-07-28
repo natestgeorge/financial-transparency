@@ -1,0 +1,67 @@
+<div class="modal-body m-3">
+   <div class="form-group row">
+      <label for="start" class="col-form-label col-4">Start Date</label>
+      <input id="start" type="date" class="form-control col-7" [ngModel]="search.start" (blur)="updateStart($event.target.value)" />
+   </div>
+   <div class="form-group row">
+      <label for="end" class="col-form-label col-4">End Date</label>
+      <input id="end" type="date" class="form-control col-7" [ngModel]="search.end" (blur)="updateEnd($event.target.value)" />
+   </div>
+   <label class="form-check-label pb-2" *ngIf="redirected">
+      <input type="checkbox" class="form-check-input" [ngModel]="olderData" (ngModelChange)="setOlderDataValues($event)" />
+      <small class="no-select">Show Older Data (before 7/1/2017)</small>
+   </label>
+   <small class="row px-3 text-muted" [ngClass]="{'text-warning': invalidDates, 'text-danger': dangerDates}" [innerHTML]="dateWarning" id="date-warning">
+   </small>
+   <hr />
+   <small class="row px-3 pb-3 text-muted">
+      Optional filters
+   </small>
+   <!-- <div class="form-group row">
+      <input type="text" id="vendor" class="form-control col-5" [(ngModel)]="search.filters.vendor" placeholder="Vendor" />
+      <div class="col-1"></div>
+         <input type="text" id="fund" class="form-control col-5" [ngbPopover]="fundContent" [popoverTitle]="fundPopover.title" [placement]="fundPopover.placement" triggers="focus:blur" container="body" [ngModel]="search.filters.fund" (ngModelChange)="filterFunds($event)" placeholder="Fund" />
+         <ng-template #fundContent>
+            <small class="clickable" *ngFor="let fund of filteredFundArray" (click)="search.filters.fund = fund.fundDesc">{{fund.fundDesc}} <br> </small>
+         </ng-template>
+   </div>
+   <div class="form-group row">
+      <input type="text" id="location" class="form-control col-5" [(ngModel)]="search.filters.location" [ngbTypeahead]="searchLocations" showHint="true" placeholder="Location" />
+      <div class="col-1"></div>
+      <input type="number" id="account" class="form-control col-5" [(ngModel)]="search.filters.account" placeholder="Account Number" />
+   </div> -->
+   <div class="form-group row">
+      <label for="vendor" class="col-form-label col-4">Vendor</label>
+      <input type="text" id="vendor" class="form-control col-7" [(ngModel)]="search.filters.vendor" placeholder="Enter Vendor" />
+   </div>
+   <div class="form-group row">
+      <label for="fund" class="col-form-label col-4">Fund</label>
+      <span class="input-group col-7 px-0">
+         <input type="text" id="fund" class="form-control" [(ngModel)]="search.filters.fund" [ngbTypeahead]="searchFunds" [resultFormatter]="formatter" placeholder="Select Fund" />
+         <span class="input-group-addon clickable" [ngbPopover]="fundContent" #fundPopover="ngbPopover" popoverTitle="Funds" placement="right" container="body">
+            <i class="fa fa-list"></i>
+            <ng-template #fundContent>
+               <small class="clickable" *ngFor="let fund of fundDescArray" (click)="search.filters.fund = fund; fundPopover.close()"> {{fund}} <br> </small>
+            </ng-template>
+         </span>
+      </span>
+
+   </div>
+   <div class="form-group row">
+      <label for="location" class="col-form-label col-4">Location</label>
+      <span class="input-group col-7 px-0">
+         <input type="text" id="location" class="form-control" [(ngModel)]="search.filters.location" [ngbTypeahead]="searchLocations" [resultFormatter]="formatter" placeholder="Select Location" />
+         <span class="input-group-addon clickable" [ngbPopover]="locationContent" #locationPopover="ngbPopover" popoverTitle="Locations" placement="right" container="body">
+            <i class="fa fa-list"></i>
+            <ng-template #locationContent>
+               <small class="clickable" *ngFor="let location of locationArray" (click)="search.filters.location = location; locationPopover.close()"> {{location}} <br> </small>
+            </ng-template>
+         </span>
+      </span>
+   </div>
+</div>
+<div class="modal-footer">
+   <span class="text-danger small mr-auto" *ngIf="hasErr || fundArray == ['Error']">There was an error connecting to the database.</span>
+
+   <button type="button" class="btn btn-primary" [disabled]="hasErr || fundArray == ['Error']" (click)="goToSearch()">Search</button>
+</div>
